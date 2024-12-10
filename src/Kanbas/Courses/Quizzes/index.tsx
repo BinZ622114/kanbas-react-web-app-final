@@ -126,7 +126,8 @@ export default function Quizzes() {
                 <BsFillRocketTakeoffFill className="wd-fg-color-green me-2 fs-3"/>
               </div>
               <div id="wd-quizzes-item" className="quiz-details flex-grow-1">
-                <Link to={`/Kanbas/Courses/${cid}/Quizzes/${quiz._id}/review`} >
+                <Link to={currentUser.role === "STUDENT" ? `/Kanbas/Courses/${cid}/Quizzes/${quiz._id}` 
+                  : `/Kanbas/Courses/${cid}/Quizzes/${quiz._id}/review`} >
                   {quiz.title}
                 </Link>
                 <h6>

@@ -11,6 +11,7 @@ import Quizzes from "./Quizzes";
 import QuizEditor from "./Quizzes/QuizEditor";
 import { useEffect, useState } from "react";
 import * as courseClient from "./client";
+import QuizReview from "./Quizzes/QuizReview";
 
 export default function Courses({ courses }: { courses: any[]; }) {
   const { cid } = useParams();
@@ -46,6 +47,7 @@ export default function Courses({ courses }: { courses: any[]; }) {
             <Route path="Assignments/:aid" element={<Editor />} />
             <Route path="People" element={<PeopleTable users={users} />} />
             <Route path="Quizzes" element={<Quizzes />} />
+            <Route path="Quizzes/:qid/review" element={<QuizReview />} />
             <Route path="Quizzes/:qid/Edit/*" element={<QuizEditor />} />
           </Routes>
         </div> 
