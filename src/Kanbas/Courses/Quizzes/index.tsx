@@ -46,9 +46,12 @@ export default function Quizzes() {
     }, [currentUser]);
 
     const createQuiz = async (courseId: string) => {
-      const quizTemplate = { _id: "1", title: "New Quiz", description: "Create a new quiz", published: false, 
-                           course: courseId, points: 100, startDate: "2024-09-01", 
-                           dueDate: "2024-12-10", untilDate: "2024-12-15", questions: 10};
+      const quizTemplate = { _id: "123", title: "New Quiz", description: "Create a new quiz", published: false, 
+                           course: courseId, points: 0, startDate: "2024-09-01", 
+                           dueDate: "2024-12-10", untilDate: "2024-12-15", shuffleAnswers: true,
+                           timeLimit: 20, multipleAttempts: false, showCorrectAnswers: false,
+                           accessCode: "", oneQuestion: true, webcamRequired: false, lockQuestion: false,
+                           assignTo: "Everyone"};
       const newQuiz = await quizzesClient.createQuiz(quizTemplate);
       dispatch(addQuiz(newQuiz));
 
