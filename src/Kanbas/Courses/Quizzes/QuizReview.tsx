@@ -7,24 +7,22 @@ export default function QuizReview() {
     const{ cid, qid } = useParams();
     const navigate = useNavigate();
     const { currentUser } = useSelector((state: any) => state.accountReducer);
-    const [currentQuiz, setCurrentQuiz] = useState<any>({});
+    const { quizzes } = useSelector((state: any) => state.quizzesReducer);
 
-    const loadQuiz = async () => {
-        try {
-          const quiz = await quizzesClient.findQuiz( qid as string );
-          setCurrentQuiz(quiz);
-        } catch (error) {
-          console.error(error);
-        }
-    };
-    useEffect(() => {
-        loadQuiz();  
-      }, []);
+    let quiz = quizzes.find((q: any) => q._id === qid);
+    if (!quiz) {
+        quiz = { _id: "123", title: "New Quiz", description: "Create a new quiz", published: false, 
+                course:`${cid}`, points: 0, startDate: "2024-09-01", 
+                dueDate: "2024-12-10", untilDate: "2024-12-15", shuffleAnswers: true,
+                timeLimit: 20, multipleAttempts: false, showCorrectAnswers: false,
+                accessCode: "", oneQuestion: true, webcamRequired: false, lockQuestion: false,
+                assignTo: "Everyone"};
+    }
+    const [currentQuiz, setCurrentQuiz] = useState<any>(quiz);
     
     if (currentUser.role === "STUDENT") {
         return (<p>Unauthorized</p>);
-    }
-    
+    } 
     return (
         <div id="wd-quiz-review">
           <div id="wd-review-title-control" className="d-flex justify-content-center align-items-center">
