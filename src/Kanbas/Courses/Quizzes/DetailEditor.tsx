@@ -127,7 +127,7 @@ export default function DetailEditor(
          </div>
         </div>
       </div>
-      <hr />
+      
 
 
 
