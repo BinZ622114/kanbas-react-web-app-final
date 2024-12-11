@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import * as quizzesClient from "./client";
 import { useDispatch, useSelector } from "react-redux";
 import { setQuizzes, deleteQuiz, updateQuiz, addQuiz } from "./reducer";
+import QuestionTemplateEditor from "./QuestionTemplateEditor";
 
 export default function QuizEditor() {
   const { pathname } = useLocation();
@@ -14,15 +15,6 @@ export default function QuizEditor() {
   const navigate = useNavigate();
   const { quizzes } = useSelector((state: any) => state.quizzesReducer);
   const dispatch = useDispatch();
-
-  /*
-  const fetchQuestions = async () => {
-    try {
-      const questions = await quizzesClient.findQuestionsForQuiz( qid as string );
-      setQuestions(questions);
-    } catch (error) {
-      console.error(error);
-    }};  */
 
   let theQuiz = quizzes.find((q: any) => q._id === qid);
   if (!theQuiz) {
@@ -78,6 +70,7 @@ export default function QuizEditor() {
                                         quiz={quiz}
                                         setQuiz={setQuiz} />} />
         <Route path="Questions" element={<QuestionEditor />} />
+        <Route path="Questions/:questionId" element={<QuestionTemplateEditor />} />
       </Routes>
       <hr />
 
